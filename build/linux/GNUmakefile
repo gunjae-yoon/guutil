@@ -1,4 +1,4 @@
-TARGET := guutil guutil.tester
+TARGET := guutil
 
 all:
 	$(foreach target,$(TARGET), make -f GNUmakefile.$(target) all;)

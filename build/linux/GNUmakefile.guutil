@@ -29,7 +29,8 @@ DEFINES :=
 
 OUTDIR := $(GROUP_HOME)/lib/$(TARGET_PATH)
 OBJDIR := $(GROUP_HOME)/objs
-SRCDIR := .
+SRCDIR := ../../guutil
+SUBDIRS := $(SRCDIR)/.;$(SRCDIR)/memory;$(SRCDIR)/thread;
 
 SRCS := $(foreach dir, $(SUBDIRS), $(wildcard $(SRCDIR)$(dir)/*.cpp))
 OBJS := $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%$(SUFFIX).o)

@@ -13,11 +13,11 @@ BIN_PATH := $(GROUP_HOME)/app/$(TARGET_PATH)
 ifeq ($(DEBUG),1)
 SUFFIX := d
 OBJ_OPTIONS := -g O0 -W -Wall -std=c++11
-BIN_OPTIONS := -shared -Wl,-soname,lib$(TARGET_BASENAME)$(SUFFIX).so
+BIN_OPTIONS := -W -std=c++11
 else
 SUFFIX :=
 OBJ_OPTIONS := -O2 -std=c++11
-BIN_OPTIONS := -shared -Wl,-soname,lib$(TARGET_BASENAME)$(SUFFIX).so
+BIN_OPTIONS := -O2 -std=c++11
 endif
 
 OBJ_FLAGS := -m$(BITS) -fPIC
@@ -27,13 +27,14 @@ LIBS := -L$(LIB_PATH) -lguutil
 
 DEFINES :=
 
-OUTDIR := $(GROUP_HOME)/lib/$(TARGET_PATH)
+OUTDIR := $(GROUP_HOME)/app/$(TARGET_PATH)
 OBJDIR := $(GROUP_HOME)/objs
-SRCDIR := .
+SRCDIR := $(PROJECT_HOME)
+SUBDIRS := $(PROJECT_HOME)/.
 
 SRCS := $(foreach dir, $(SUBDIRS), $(wildcard $(SRCDIR)$(dir)/*.cpp))
 OBJS := $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%$(SUFFIX).o)
-TARGET := $(OUTDIR)/lib$(TARGET_BASENAME)$(SUFFIX).so
+TARGET := $(OUTDIR)/$(TARGET_BASENAME)$(SUFFIX)
 
 $(foreach dir, $(SUBDIRS), $(shell mkdir -p $(OBJDIR)/%(dir)))
 $(OBJDIR)/%$(OBJ_SUFFIX).o : $(SRCDIR)/%.cpp
