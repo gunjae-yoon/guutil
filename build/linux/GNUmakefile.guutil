@@ -1,0 +1,49 @@
+TARGET_BASENAME := guutil
+BITS := $(shell getconf LONG_BIT)
+
+LINUX_VER=$(shell uname -r | cut -f 1 -d '.')
+GCC_VER=$(shell gcc --version | grep gcc | rev | cut -f 1 -d ' ' | rev)
+TARGET_PATH=x$(BITS)Linux$(LINUX_VER)gcc$(GCC_VER)
+
+GROUP_HOME := ../..
+PROJECT_HOME := $(GROUP_HOME)/guutil
+INCLUDES := -I$(GROUP_HOME)/include
+LIB_PATH := $(GROUP_HOME)/lib/$(TARGET_PATH)
+
+ifeq ($(DEBUG),1)
+SUFFIX := d
+OBJ_OPTIONS := -g O0 -W -Wall -std=c++11
+LIB_OPTIONS := -shared -Wl,-soname,lib$(TARGET_BASENAME)$(SUFFIX).so
+else
+SUFFIX :=
+OBJ_OPTIONS := -O2 -std=c++11
+LIB_OPTIONS := -shared -Wl,-soname,lib$(TARGET_BASENAME)$(SUFFIX).so
+endif
+
+OBJ_FLAGS := -m$(BITS) -fPIC
+BIN_FLAGS := -m$(BITS) -fPIC
+LIB_FLAGS := -m$(BITS)
+LIBS := -L$(LIB_PATH)
+
+DEFINES :=
+
+OUTDIR := $(GROUP_HOME)/lib/$(TARGET_PATH)
+OBJDIR := $(GROUP_HOME)/objs
+SRCDIR := .
+
+SRCS := $(foreach dir, $(SUBDIRS), $(wildcard $(SRCDIR)$(dir)/*.cpp))
+OBJS := $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%$(SUFFIX).o)
+TARGET := $(OUTDIR)/lib$(TARGET_BASENAME)$(SUFFIX).so
+
+$(foreach dir, $(SUBDIRS), $(shell mkdir -p $(OBJDIR)/%(dir)))
+$(OBJDIR)/%$(OBJ_SUFFIX).o : $(SRCDIR)/%.cpp
+	$(CXX) $(OBJ_FLAGS) $(OBJ_OPTIONS) -o $@ $(DEFINES) $(INCLUDES) -c $<
+
+pre-build:
+	mkdir -p $(OUTDIR);sh PreBuildEvent.sh;
+
+all: pre-build $(OBJS)
+	$(CXX) $(LIB_FLAGS) $(LIB_OPTIONS) -o $(TARGET) $(OBJS) $(LIBS)
+
+clean:
+	rm -rf $(TARGET) $(GROUP_HOME)/objs
