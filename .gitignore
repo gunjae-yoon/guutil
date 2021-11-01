@@ -1,0 +1,8 @@
+*.swp
+*.pdb
+*.user
+*/.vs/
+/lib
+/objs
+/app
+*/version.h
