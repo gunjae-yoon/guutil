@@ -29,19 +29,20 @@ DEFINES :=
 
 OUTDIR := $(GROUP_HOME)/lib/$(TARGET_PATH)
 OBJDIR := $(GROUP_HOME)/objs
-SRCDIR := ../../guutil
-SUBDIRS := $(SRCDIR)/.;$(SRCDIR)/memory;$(SRCDIR)/thread;
+SRCDIR := $(PROJECT_HOME)
+SUBDIRS := memory\
+		   thread\
 
-SRCS := $(foreach dir, $(SUBDIRS), $(wildcard $(SRCDIR)$(dir)/*.cpp))
+SRCS := $(foreach dir, $(SUBDIRS), $(wildcard $(SRCDIR)/$(dir)/*.cpp))
 OBJS := $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%$(SUFFIX).o)
 TARGET := $(OUTDIR)/lib$(TARGET_BASENAME)$(SUFFIX).so
 
-$(foreach dir, $(SUBDIRS), $(shell mkdir -p $(OBJDIR)/%(dir)))
+$(foreach dir, $(SUBDIRS), $(shell mkdir -p $(OBJDIR)/$(dir)))
 $(OBJDIR)/%$(OBJ_SUFFIX).o : $(SRCDIR)/%.cpp
 	$(CXX) $(OBJ_FLAGS) $(OBJ_OPTIONS) -o $@ $(DEFINES) $(INCLUDES) -c $<
 
 pre-build:
-	mkdir -p $(OUTDIR);sh PreBuildEvent.sh;
+	mkdir -p $(OBJDIR);mkdir -p $(OUTDIR);sh PreBuildEvent.sh;
 
 all: pre-build $(OBJS)
 	$(CXX) $(LIB_FLAGS) $(LIB_OPTIONS) -o $(TARGET) $(OBJS) $(LIBS)
