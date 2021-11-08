@@ -30,13 +30,13 @@ DEFINES :=
 OUTDIR := $(GROUP_HOME)/app/$(TARGET_PATH)
 OBJDIR := $(GROUP_HOME)/objs
 SRCDIR := $(PROJECT_HOME)
-SUBDIRS := $(PROJECT_HOME)/.
+SUBDIRS := .
 
-SRCS := $(foreach dir, $(SUBDIRS), $(wildcard $(SRCDIR)$(dir)/*.cpp))
+SRCS := $(foreach dir, $(SUBDIRS), $(wildcard $(SRCDIR)/$(dir)/*.cpp))
 OBJS := $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%$(SUFFIX).o)
 TARGET := $(OUTDIR)/$(TARGET_BASENAME)$(SUFFIX)
 
-$(foreach dir, $(SUBDIRS), $(shell mkdir -p $(OBJDIR)/%(dir)))
+$(foreach dir, $(SUBDIRS), $(shell mkdir -p $(OBJDIR)/$(dir)))
 $(OBJDIR)/%$(OBJ_SUFFIX).o : $(SRCDIR)/%.cpp
 	$(CXX) $(OBJ_FLAGS) $(OBJ_OPTIONS) -o $@ $(DEFINES) $(INCLUDES) -c $<
 
