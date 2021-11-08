@@ -8,6 +8,7 @@ TARGET_PATH=x$(BITS)Linux$(LINUX_VER)gcc$(GCC_VER)
 GROUP_HOME := ../..
 PROJECT_HOME := $(GROUP_HOME)/guutil.tester
 INCLUDES := -I$(GROUP_HOME)/include
+LIB_PATH := $(GROUP_HOME)/lib/$(TARGET_PATH)
 BIN_PATH := $(GROUP_HOME)/app/$(TARGET_PATH)
 
 ifeq ($(DEBUG),1)
@@ -23,7 +24,7 @@ endif
 OBJ_FLAGS := -m$(BITS) -fPIC
 BIN_FLAGS := -m$(BITS) -fPIC
 LIB_FLAGS := -m$(BITS)
-LIBS := -L$(LIB_PATH) -lguutil
+LIBS := -L$(LIB_PATH) -lguutil -pthread -lrt
 
 DEFINES :=
 

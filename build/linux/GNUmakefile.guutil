@@ -7,7 +7,7 @@ TARGET_PATH=x$(BITS)Linux$(LINUX_VER)gcc$(GCC_VER)
 
 GROUP_HOME := ../..
 PROJECT_HOME := $(GROUP_HOME)/guutil
-INCLUDES := -I$(GROUP_HOME)/include
+INCLUDES := -I$(GROUP_HOME)/include -I$(GROUP_HOME)
 LIB_PATH := $(GROUP_HOME)/lib/$(TARGET_PATH)
 
 ifeq ($(DEBUG),1)
@@ -20,10 +20,10 @@ OBJ_OPTIONS := -O2 -std=c++11
 LIB_OPTIONS := -shared -Wl,-soname,lib$(TARGET_BASENAME)$(SUFFIX).so
 endif
 
-OBJ_FLAGS := -m$(BITS) -fPIC
-BIN_FLAGS := -m$(BITS) -fPIC
-LIB_FLAGS := -m$(BITS)
-LIBS := -L$(LIB_PATH)
+OBJ_FLAGS := -m$(BITS) -fPIC -fno-permissive
+BIN_FLAGS := -m$(BITS) -fPIC -fno-permissive
+LIB_FLAGS := -m$(BITS) -fno-permissive
+LIBS := -L$(LIB_PATH) -pthread -lrt
 
 DEFINES :=
 
