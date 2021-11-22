@@ -19,7 +19,7 @@ namespace guutil {
 		static_cast<SharedMutexImpl*>(this)->unlock();
 	}
 
-	SharedMutex* SharedMutex::createSharedMutex(std::string name) {
+	SharedMutex* SharedMutex::createInstance(std::string name) {
 		return new SharedMutexImpl(name);
 	}
 }

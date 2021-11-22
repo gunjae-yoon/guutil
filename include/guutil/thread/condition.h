@@ -17,15 +17,17 @@ namespace guutil {
 #endif
 
 	class DLL_EXPORT Condition {
-	private:
-		NATIVE_CONDITION_HANDLE handle;
+	protected:
+		Condition(void);
 
 	public:
-		Condition(void);
 		virtual ~Condition(void);
 
-		void wait(int32_t usec);
-		void signal(void);
+		virtual void init(void);
+		virtual void wait(int32_t usec);
+		virtual void signal(void);
+
+		static Condition* createInstance(void);
 	};
 
 }

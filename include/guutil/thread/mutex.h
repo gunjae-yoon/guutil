@@ -15,8 +15,11 @@ namespace guutil {
 		Mutex(void);
 		virtual ~Mutex(void);
 
+		virtual void init(void);
 		virtual void lock(void);
 		virtual void unlock(void);
+
+		static Mutex* createInstance(void);
 	};
 
 }

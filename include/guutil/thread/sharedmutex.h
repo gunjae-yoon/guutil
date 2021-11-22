@@ -22,7 +22,7 @@ namespace guutil {
 		virtual void lock(void);
 		virtual void unlock(void);
 
-		static SharedMutex* createSharedMutex(std::string name);
+		static SharedMutex* createInstance(std::string name);
 	};
 
 }

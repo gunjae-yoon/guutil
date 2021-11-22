@@ -18,6 +18,7 @@ namespace guutil {
 		MutexImpl(void);
 		virtual ~MutexImpl(void);
 
+		virtual void init(void);
 		virtual void lock(void);
 		virtual void unlock(void);
 	};
