@@ -23,15 +23,17 @@ endif
 OBJ_FLAGS := -m$(BITS) -fPIC -fno-permissive
 BIN_FLAGS := -m$(BITS) -fPIC -fno-permissive
 LIB_FLAGS := -m$(BITS) -fno-permissive
-LIBS := -L$(LIB_PATH) -pthread -lrt
+LIBS := -L$(LIB_PATH) -lpthread -lrt
 
 DEFINES :=
 
 OUTDIR := $(GROUP_HOME)/lib/$(TARGET_PATH)
 OBJDIR := $(GROUP_HOME)/objs
 SRCDIR := $(PROJECT_HOME)
-SUBDIRS := memory\
-		   thread\
+SUBDIRS := thread\
+		   memory\
+		   memory/memorymanager_impl\
+
 
 SRCS := $(foreach dir, $(SUBDIRS), $(wildcard $(SRCDIR)/$(dir)/*.cpp))
 OBJS := $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%$(SUFFIX).o)
