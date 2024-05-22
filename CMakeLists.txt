@@ -41,6 +41,7 @@ if (BUILD_LIB)
 		src/guutil/memory/memorymanager.cpp
 		src/guutil/memory/impl/buddy.cpp
 		src/guutil/memory/impl/memorymanager_impl.cpp
+		src/guutil/memory/impl/plain.cpp
 		src/guutil/process/named_mutex.cpp
 	)
 	add_dependencies(${TARGET_LIB} GEN_TARGET)
