@@ -3,23 +3,26 @@
 
 #include <cstdint>
 #include <mutex>
+#include <memory>
+#include <guutil/memory/impl/memorymanager_impl.h>
 
 namespace guutil {
+	enum class MMKind {
+		PLAIN,
+		BUDDY
+	};
+
 	class MemoryManager {
 	public:
-		MemoryManager(const uint64_t size);
-		virtual ~MemoryManager();
+		MemoryManager(const MMKind kind, const uint64_t size);
+		~MemoryManager();
 	
 		void* allocate(const uint64_t size);
 		void deallocate(void* ptr);
 
 	protected:
-		virtual void* _allocate(const uint64_t size) = 0;
-		virtual void _deallocate(void* ptr) = 0;
-
-	protected:
-		const uint64_t capacity;
 		std::mutex mutex;
+		std::unique_ptr<MemoryManagerImpl> impl;
 	};
 }
 

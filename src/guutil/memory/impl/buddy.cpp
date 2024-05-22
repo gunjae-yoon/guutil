@@ -3,18 +3,17 @@
 #include <iostream>
 
 namespace guutil {
-	Buddy::Buddy(uint64_t size) : MemoryManager(size) {
+	Buddy::Buddy(uint64_t size) : MemoryManagerImpl(size) {
 		printf("Buddy::Buddy(%lu)\n", size);
 		baseMemory = static_cast<int8_t*>(std::malloc(size));
 		head = create(baseMemory, 0, size);
 	}
 
 	Buddy::~Buddy() {
-		std::unique_lock<std::mutex> guard(mutex);
 		std::free(baseMemory);
 	}
 
-	void* Buddy::_allocate(const uint64_t size) {
+	void* Buddy::allocate(const uint64_t size) {
 		printf("Buddy::_allocate(%lu)\n", size);
 		const uint64_t blockSize = std::pow(2, std::ceil(std::log2(size))); // Note: round up to the nearest power of two
 		Block* block = find(blockSize);
@@ -26,7 +25,7 @@ namespace guutil {
 		return static_cast<void*>(block + 1);
 	}
 
-	void Buddy::_deallocate(void* ptr) {
+	void Buddy::deallocate(void* ptr) {
 		printf("Buddy::_deallocate(%p)\n", ptr);
 		if (ptr == nullptr) {
 			return;
