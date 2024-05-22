@@ -1,6 +1,8 @@
 #include <guutil/memory/impl/buddy.h>
 #include <array>
 
+using namespace guutil;
+
 int main(int argc, char** argv) {
 	Buddy buddy(1024);
 
