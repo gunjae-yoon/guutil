@@ -14,7 +14,7 @@ namespace guutil {
 	}
 
 	void* Buddy::allocate(const uint64_t size) {
-		printf("Buddy::_allocate(%lu)\n", size);
+		printf("Buddy::allocate(%lu)\n", size);
 		const uint64_t blockSize = std::pow(2, std::ceil(std::log2(size))); // Note: round up to the nearest power of two
 		Block* block = find(blockSize);
 		if (block == nullptr) {
@@ -26,7 +26,7 @@ namespace guutil {
 	}
 
 	void Buddy::deallocate(void* ptr) {
-		printf("Buddy::_deallocate(%p)\n", ptr);
+		printf("Buddy::deallocate(%p)\n", ptr);
 		if (ptr == nullptr) {
 			return;
 		}
