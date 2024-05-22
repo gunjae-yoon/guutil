@@ -40,6 +40,8 @@ if (BUILD_LIB)
 		${GEN_SRC}
 		src/guutil/memory/memorymanager.cpp
 		src/guutil/memory/impl/buddy.cpp
+		src/guutil/memory/impl/memorymanager_impl.cpp
+		src/guutil/process/named_mutex.cpp
 	)
 	add_dependencies(${TARGET_LIB} GEN_TARGET)
 	target_include_directories(${TARGET_LIB} PRIVATE
