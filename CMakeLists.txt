@@ -8,8 +8,14 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_compile_options(-fpermissive)
 
-set(BUILD_LIB "Build guutil library" ON)
-set(BUILD_TEST "Build test application" OFF)
+option(BUILD_LIB "Build guutil library" ON)
+option(BUILD_TEST "Build test application" OFF)
+
+message("==================================================")
+message(STATUS "Compiler: ${CMAKE_CXX_COMPILER}")
+message(STATUS "Build guutil library: ${BUILD_LIB}")
+message(STATUS "Build test application: ${BUILD_TEST}")
+message("==================================================")
 
 if (BUILD_LIB)
 	##########################################################################
