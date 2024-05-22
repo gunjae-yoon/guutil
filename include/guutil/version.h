@@ -5,16 +5,16 @@
 #include <string>
 
 namespace guutil {
-    namespace Version {
-        extern const uint64_t major;
-        extern const uint64_t minor;
-        extern const uint64_t patch;
+	namespace Version {
+		extern const uint64_t major;
+		extern const uint64_t minor;
+		extern const uint64_t patch;
 
-        extern const char* hashcode;
-        extern const char* updated;
+		extern const char* hashcode;
+		extern const char* updated;
 
-        extern const std::string full;
-    }
+		extern const std::string full;
+	}
 }
 
 #endif

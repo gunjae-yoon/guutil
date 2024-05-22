@@ -13,7 +13,7 @@ UPDATED_VAL=`git log -1 --date=format:"%Y/%m/%d %T" --pretty=format:%ad`
 UPDATED_CHANGE=$(echo $UPDATED_VAL $i | sed -e 's/\//\\\//g')
 
 if [ -d $TARGET_PATH ]; then
-    rm $TARGET_PATH
+	rm $TARGET_PATH
 fi
 
 sed "s/$HASH_KEY/$HASH_VAL/g" $SOURCE_PATH | sed "s/$UPDATED_KEY/$UPDATED_CHANGE/g" > $TARGET_PATH 
