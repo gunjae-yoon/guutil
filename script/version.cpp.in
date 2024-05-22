@@ -1,10 +1,10 @@
 #include <guutil/version.h>
 
 namespace guutil::Version {
-    extern const uint64_t major = 0;
-    extern const uint64_t minor = 0;
-    extern const uint64_t patch = 1;
-    extern const char* hashcode = "HASH";
-    extern const char* updated = "UPDATED";
-    extern const std::string full = std::to_string(major) + "." + std::to_string(minor) + "." + std::to_string(patch) + " (updated: UPDATED, hash: HASH)";
+    const uint64_t major = 0;
+    const uint64_t minor = 0;
+    const uint64_t patch = 1;
+    const char* hashcode = "HASH";
+    const char* updated = "UPDATED";
+    const std::string full = std::to_string(major) + "." + std::to_string(minor) + "." + std::to_string(patch) + " (updated: UPDATED, hash: HASH)";
 }
