@@ -6,14 +6,14 @@
 
 namespace guutil {
     namespace Version {
-        static const uint64_t major;
-        static const uint64_t minor;
-        static const uint64_t patch;
+        extern const uint64_t major;
+        extern const uint64_t minor;
+        extern const uint64_t patch;
 
-        static const char* hashcode;
-        static const char* updated;
+        extern const char* hashcode;
+        extern const char* updated;
 
-        static const std::string full;
+        extern const std::string full;
     }
 }
 
