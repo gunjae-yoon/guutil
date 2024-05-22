@@ -16,7 +16,7 @@ namespace guutil {
 	}
 
 	void Plain::deallocate(void* ptr) {
-		printf("Buddy::deallocate(%p)\n", ptr);
+		printf("Plain::deallocate(%p)\n", ptr);
 		if (ptr == nullptr) {
 			return;
 		}
