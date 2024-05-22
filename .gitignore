@@ -41,7 +41,7 @@
 build
 
 # Version
-src/version.cpp
+**/version.cpp
 
 # Ctags
 **/tags
