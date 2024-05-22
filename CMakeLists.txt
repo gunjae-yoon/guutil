@@ -13,6 +13,7 @@ option(BUILD_TEST "Build test application" OFF)
 
 message("==================================================")
 message(STATUS "Compiler: ${CMAKE_CXX_COMPILER}")
+message(STATUS "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
 message(STATUS "Build guutil library: ${BUILD_LIB}")
 message(STATUS "Build test application: ${BUILD_TEST}")
 message("==================================================")
@@ -45,6 +46,36 @@ if (BUILD_LIB)
 		include
 		src
 	)
+
+	##########################################################################
+	# settings for make install
+	##########################################################################
+	install(
+		DIRECTORY ${PROJECT_SOURCE_DIR}/include/
+		DESTINATION ${CMAKE_INSTALL_PREFIX}/include
+		FILES_MATCHING PATTERN "*.h"
+	)
+	install(
+		FILES ${PROJECT_BINARY_DIR}/lib${TARGET_LIB}.so
+		DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
+	)
+	install(CODE "
+        file(APPEND \"${CMAKE_INSTALL_PREFIX}/guutil.install_manifest.txt\" \"${CMAKE_INSTALL_PREFIX}/include/\n\")
+        file(GLOB_RECURSE headers \"${PROJECT_SOURCE_DIR}/include/*.h\")
+        foreach(header \${headers})
+            file(RELATIVE_PATH rel_header \"${PROJECT_SOURCE_DIR}\" \${header})
+            file(APPEND \"${CMAKE_INSTALL_PREFIX}/guutil.install_manifest.txt\" \"${CMAKE_INSTALL_PREFIX}/\${rel_header}\n\")
+        endforeach()
+        file(APPEND \"${CMAKE_INSTALL_PREFIX}/guutil.install_manifest.txt\" \"${CMAKE_INSTALL_PREFIX}/lib/lib${TARGET_LIB}.so\n\")
+    ")
+	configure_file(
+		"${CMAKE_CURRENT_SOURCE_DIR}/script/cmake_uninstall.cmake.in"
+		"${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+		IMMEDIATE @ONLY
+	)
+	add_custom_target(uninstall
+		COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake
+	)
 endif ()
 
 if (BUILD_TEST)
@@ -62,3 +93,4 @@ if (BUILD_TEST)
 		guutil
 	)
 endif ()
+
