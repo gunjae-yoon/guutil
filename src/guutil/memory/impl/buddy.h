@@ -20,9 +20,9 @@ namespace guutil {
 		void* allocate(const uint64_t size) override;
 		void deallocate(void* ptr) override;
 
-		Block* create(int8_t* base, uint64_t offset, const uint64_t size);
+		Block* create(int8_t* base, const uint64_t offset, const uint64_t size);
 		Block* find(const uint64_t size);
-		void split(Block* block, uint64_t size);
+		void split(Block* block, const uint64_t size);
 		void merge(Block* block);
 		
 	private:

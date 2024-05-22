@@ -35,7 +35,7 @@ namespace guutil {
 		merge(block);
 	}
 
-	Buddy::Block* Buddy::create(int8_t* base, uint64_t offset, const uint64_t size) {
+	Buddy::Block* Buddy::create(int8_t* base, const uint64_t offset, const uint64_t size) {
 		printf("Buddy::create(%lu)\n", size);
 		Block* block = reinterpret_cast<Block*>(base + offset);
 		block->size = size;
@@ -56,7 +56,7 @@ namespace guutil {
 		return nullptr;
 	}
 
-	void Buddy::split(Block* block, uint64_t size) {
+	void Buddy::split(Block* block, const uint64_t size) {
 		printf("Buddy::split(%p, %lu)\n", block, size);
 		while (block->size > size) {
 			uint64_t newSize = block->size / 2;
