@@ -1,8 +1,47 @@
-*.swp
-*.pdb
+# Visual Studio
+**/.vs
+**/bin
+**/obj
+**/Release
+**/Debug
+**/x64
+**/x86
 *.user
-*/.vs/
-/lib
-/objs
-/app
-*/version.h
+
+# Visual Studio Code
+**/.vscode
+#.vscode/*
+#!.vscode/settings.json
+#!.vscode/tasks.json
+#!.vscode/launch.json
+#!.vscode/extensions.json
+*.code-workspace
+
+# Temporary Files
+*.diff
+*.err
+*.log
+*.orig
+*.rej
+*.swo
+*.swp
+*.vi
+
+# Compressed Files
+*.zip
+*.rar
+*.gzip
+*.deb
+*.7z
+*.tar.gz
+*.xz
+*.alz
+
+# Build
+build
+
+# Version
+src/version.cpp
+
+# Ctags
+**/tags
