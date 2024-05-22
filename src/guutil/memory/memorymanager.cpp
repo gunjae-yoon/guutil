@@ -1,10 +1,12 @@
 #include <guutil/memory/memorymanager.h>
 #include <guutil/memory/impl/buddy.h>
+#include <guutil/memory/impl/plain.h>
 
 namespace guutil {
 	MemoryManager::MemoryManager(const MMKind kind, const uint64_t size) {
 		switch (kind) {
 		case MMKind::PLAIN:
+			impl = std::make_unique<Plain>(size);
 			break;
 		case MMKind::BUDDY:
 			impl = std::make_unique<Buddy>(size);
