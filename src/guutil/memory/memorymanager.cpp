@@ -3,7 +3,7 @@
 #include <guutil/memory/impl/plain.h>
 
 namespace guutil {
-	MemoryManager::MemoryManager(const MMKind kind, const uint64_t size) {
+	MemoryManager::MemoryManager(const MMKind kind, const uint64_t size, const MMArea area) {
 		switch (kind) {
 		case MMKind::PLAIN:
 			impl = std::make_unique<Plain>(size);
