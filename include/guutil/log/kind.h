@@ -2,6 +2,7 @@
 #define __guutil_log_kind_h__
 
 #include <cstdint>
+#include <iostream>
 
 namespace guutil {
 	namespace log {
@@ -21,6 +22,13 @@ namespace guutil {
 			CONSOLE = 2,
 			ALL = 3
 		};
+		
+		inline Target operator & (Target lhs, Target rhs) {
+			return static_cast<Target>(
+				static_cast<std::underlying_type_t<Target>>(lhs) &
+				static_cast<std::underlying_type_t<Target>>(rhs)
+			);
+		}
 	}
 }
 
