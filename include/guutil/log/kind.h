@@ -14,13 +14,13 @@ namespace guutil {
 			DEBUG,
 			VERBOSE,
 			TRACE,
-			ALL
+			ALL = 0xffffffff
 		};
 		
 		enum class Target : uint32_t {
-			FILE = 1,
-			CONSOLE = 2,
-			ALL = 3
+			FILE = 0x00000001,
+			CONSOLE = 0x00000002,
+			ALL = 0xffffffff
 		};
 		
 		inline Target operator & (Target lhs, Target rhs) {
