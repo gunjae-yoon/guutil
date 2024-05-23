@@ -38,6 +38,8 @@ if (BUILD_LIB)
 	set(TARGET_LIB "guutil")
 	add_library(${TARGET_LIB} SHARED
 		${GEN_SRC}
+		src/guutil/log/logger.cpp
+		src/guutil/log/stringify.cpp
 		src/guutil/memory/memorymanager.cpp
 		src/guutil/memory/impl/buddy.cpp
 		src/guutil/memory/impl/memorymanager_impl.cpp
