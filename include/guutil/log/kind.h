@@ -12,7 +12,8 @@ namespace guutil {
 			INFO,
 			DEBUG,
 			VERBOSE,
-			TRACE
+			TRACE,
+			ALL
 		};
 		
 		enum class Target : uint32_t {
