@@ -3,10 +3,9 @@
 
 #include <guutil/log/kind.h>
 #include <guutil/log/stringify.h>
+#include <guutil/io/console.h>
 #include <string>
 #include <mutex>
-
-#include <iostream> //temporary
 
 namespace guutil {
 	namespace log {
@@ -40,7 +39,9 @@ namespace guutil {
 				return;
 			}
 			std::string txt = stringify::fatal(module.c_str(), args...);
-			std::cout << txt;
+			if ((target & Target::CONSOLE) == Target::CONSOLE) {
+				console::print(txt);
+			}
 		}
 
 		template <typename... Args>
@@ -49,7 +50,9 @@ namespace guutil {
 				return;
 			}
 			std::string txt = stringify::error(module.c_str(), args...);
-			std::cout << txt;
+			if ((target & Target::CONSOLE) == Target::CONSOLE) {
+				console::print(txt);
+			}
 		}
 
 		template <typename... Args>
@@ -58,7 +61,9 @@ namespace guutil {
 				return;
 			}
 			std::string txt = stringify::warning(module.c_str(), args...);
-			std::cout << txt;
+			if ((target & Target::CONSOLE) == Target::CONSOLE) {
+				console::print(txt);
+			}
 		}
 
 		template <typename... Args>
@@ -67,7 +72,9 @@ namespace guutil {
 				return;
 			}
 			std::string txt = stringify::info(module.c_str(), args...);
-			std::cout << txt;
+			if ((target & Target::CONSOLE) == Target::CONSOLE) {
+				console::print(txt);
+			}
 		}
 
 		template <typename... Args>
@@ -76,7 +83,9 @@ namespace guutil {
 				return;
 			}
 			std::string txt = stringify::debug(module.c_str(), args...);
-			std::cout << txt;
+			if ((target & Target::CONSOLE) == Target::CONSOLE) {
+				console::print(txt);
+			}
 		}
 
 		template <typename... Args>
@@ -85,7 +94,9 @@ namespace guutil {
 				return;
 			}
 			std::string txt = stringify::verbose(module.c_str(), args...);
-			std::cout << txt;
+			if ((target & Target::CONSOLE) == Target::CONSOLE) {
+				console::print(txt);
+			}
 		}
 
 		template <typename... Args>
@@ -94,7 +105,9 @@ namespace guutil {
 				return;
 			}
 			std::string txt = stringify::trace(module.c_str(), args...);
-			std::cout << txt;
+			if ((target & Target::CONSOLE) == Target::CONSOLE) {
+				console::print(txt);
+			}
 		}
 	}
 }
