@@ -11,10 +11,15 @@ namespace guutil {
 		PLAIN,
 		BUDDY
 	};
+	
+	enum class MMArea {
+		LOCAL,
+		SHARED
+	};
 
 	class MemoryManager {
 	public:
-		MemoryManager(const MMKind kind, const uint64_t size);
+		MemoryManager(const MMKind kind = MMKind::PLAIN, const uint64_t size = 0, const MMArea area = MMArea::LOCAL);
 		~MemoryManager();
 	
 		void* allocate(const uint64_t size);
