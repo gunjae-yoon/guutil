@@ -8,12 +8,14 @@
 namespace guutil {
 	namespace log {
 		namespace stringify {
-			std::string getCurrentTimeAsString();
+			std::string getCurrentTimeAsStringInMilliseconds();
+			std::string getCurrentTimeAsStringInMicroseconds();
+			std::string getCurrentTimeAsStringInNanoseconds();
 			
 			template <typename... Args>
 			std::string fatal(const char* module, Args... args) {
 				std::stringstream ss;
-				ss << getCurrentTimeAsString() << " [FATAL  ] [" << module << "]";
+				ss << getCurrentTimeAsStringInMicroseconds() << " [FATAL  ] [" << module << "]";
 				auto insertWithSpace = [&ss](const auto& arg) { ss << ' ' << arg; };
 				(insertWithSpace(args), ...);
 				ss << std::endl;
@@ -23,7 +25,7 @@ namespace guutil {
 			template <typename... Args>
 			std::string error(const char* module, Args... args) {
 				std::stringstream ss;
-				ss << getCurrentTimeAsString() << " [ERROR  ] [" << module << "]";
+				ss << getCurrentTimeAsStringInMicroseconds() << " [ERROR  ] [" << module << "]";
 				auto insertWithSpace = [&ss](const auto& arg) { ss << ' ' << arg; };
 				(insertWithSpace(args), ...);
 				ss << std::endl;
@@ -33,7 +35,7 @@ namespace guutil {
 			template <typename... Args>
 			std::string warning(const char* module, Args... args) {
 				std::stringstream ss;
-				ss << getCurrentTimeAsString() << " [WARNING] [" << module << "]";
+				ss << getCurrentTimeAsStringInMicroseconds() << " [WARNING] [" << module << "]";
 				auto insertWithSpace = [&ss](const auto& arg) { ss << ' ' << arg; };
 				(insertWithSpace(args), ...);
 				ss << std::endl;
@@ -43,7 +45,7 @@ namespace guutil {
 			template <typename... Args>
 			std::string info(const char* module, Args... args) {
 				std::stringstream ss;
-				ss << getCurrentTimeAsString() << " [INFO   ] [" << module << "]";
+				ss << getCurrentTimeAsStringInMicroseconds() << " [INFO   ] [" << module << "]";
 				auto insertWithSpace = [&ss](const auto& arg) { ss << ' ' << arg; };
 				(insertWithSpace(args), ...);
 				ss << std::endl;
@@ -53,7 +55,7 @@ namespace guutil {
 			template <typename... Args>
 			std::string debug(const char* module, Args... args) {
 				std::stringstream ss;
-				ss << getCurrentTimeAsString() << " [DEBUG  ] [" << module << "]";
+				ss << getCurrentTimeAsStringInMicroseconds() << " [DEBUG  ] [" << module << "]";
 				auto insertWithSpace = [&ss](const auto& arg) { ss << ' ' << arg; };
 				(insertWithSpace(args), ...);
 				ss << std::endl;
@@ -63,7 +65,7 @@ namespace guutil {
 			template <typename... Args>
 			std::string verbose(const char* module, Args... args) {
 				std::stringstream ss;
-				ss << getCurrentTimeAsString() << " [VERBOSE] [" << module << "]";
+				ss << getCurrentTimeAsStringInMicroseconds() << " [VERBOSE] [" << module << "]";
 				auto insertWithSpace = [&ss](const auto& arg) { ss << ' ' << arg; };
 				(insertWithSpace(args), ...);
 				ss << std::endl;
@@ -73,7 +75,7 @@ namespace guutil {
 			template <typename... Args>
 			std::string trace(const char* module, Args... args) {
 				std::stringstream ss;
-				ss << getCurrentTimeAsString() << " [TRACE  ] [" << module << "] ";
+				ss << getCurrentTimeAsStringInMicroseconds() << " [TRACE  ] [" << module << "] ";
 				auto insertWithSpace = [&ss](const auto& arg) { ss << ' ' << arg; };
 				(insertWithSpace(args), ...);
 				ss << std::endl;
