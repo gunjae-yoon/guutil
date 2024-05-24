@@ -8,9 +8,18 @@ namespace guutil {
 		name(filename),
 		limit(maxsize),
 		count(0) {
+		std::ofstream stream(path, std::ios::app);
+		if (stream.is_open()) {
+			stream.close();
+		}
 	}
 
 	File::~File() {
+		// Remove empty file
+		std::uint64_t stored = std::filesystem::file_size(path);
+		if (stored == 0) {
+			std::filesystem::remove(path);
+		}
 	}
 
 	void File::print(const std::string& value) {
