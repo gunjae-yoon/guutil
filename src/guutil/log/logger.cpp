@@ -3,7 +3,7 @@
 
 namespace guutil {
 	namespace log {
-		Logger::Logger(const std::string modulename, const Level level, const Target output) : module(modulename), lv(level), target(output) {
+		Logger::Logger(const std::string modulename, const Level level, const Target output, const std::filesystem::path directory, const uint64_t limit) : module(modulename), lv(level), target(output), file(directory, modulename, limit) {
 		}
 
 		Logger::~Logger() {
