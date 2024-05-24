@@ -7,7 +7,7 @@ using namespace guutil;
 
 int main(int argc, char** argv) {
 	MemoryManager mm(MMKind::PLAIN, 1024);
-	guutil::log::Logger logger("tester");
+	guutil::log::Logger logger("tester", log::Level::ALL, log::Target::ALL);
 
 	std::array<void*, 10> arr = {};
 	for (void*& element : arr) {

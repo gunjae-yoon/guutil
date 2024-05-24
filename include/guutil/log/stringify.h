@@ -11,6 +11,7 @@ namespace guutil {
 			std::string getCurrentTimeAsStringInMilliseconds();
 			std::string getCurrentTimeAsStringInMicroseconds();
 			std::string getCurrentTimeAsStringInNanoseconds();
+			std::string getCurrentTimeForFile();
 			
 			template <typename... Args>
 			std::string fatal(const char* module, Args... args) {
