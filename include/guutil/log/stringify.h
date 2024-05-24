@@ -76,7 +76,7 @@ namespace guutil {
 			template <typename... Args>
 			std::string trace(const char* module, Args... args) {
 				std::stringstream ss;
-				ss << getCurrentTimeAsStringInMicroseconds() << " [TRACE  ] [" << module << "] ";
+				ss << getCurrentTimeAsStringInMicroseconds() << " [TRACE  ] [" << module << "]";
 				auto insertWithSpace = [&ss](const auto& arg) { ss << ' ' << arg; };
 				(insertWithSpace(args), ...);
 				ss << std::endl;
