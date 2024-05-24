@@ -2,6 +2,7 @@
 #define __guutil_memory_impl_memory_manager_impl_h__
 
 #include <cstdint>
+#include <guutil/log/logger.h>
 
 namespace guutil {
 	class MemoryManagerImpl {
@@ -14,6 +15,7 @@ namespace guutil {
 
 	protected:
 		const uint64_t capacity;
+		static log::Logger logger;
 	};
 }
 
