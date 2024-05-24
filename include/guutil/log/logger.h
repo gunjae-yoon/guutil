@@ -12,7 +12,7 @@ namespace guutil {
 	namespace log {
 		class Logger {
 		public:
-			Logger(const std::string modulename, const Level level = Level::ALL, const Target output = Target::CONSOLE, const std::filesystem::path directory = std::filesystem::current_path(), const uint64_t limit = 0xffffffffffffffff);
+			Logger(const std::string modulename, const Level level = Level::ALL, const Target output = Target::CONSOLE, const std::filesystem::path directory = (std::filesystem::current_path()/"log"), const uint64_t limit = 0xffffffffffffffff);
 			~Logger();
 			
 			template <typename... Args> void fatal(Args... args);
