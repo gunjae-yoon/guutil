@@ -8,6 +8,9 @@ namespace guutil {
 		name(filename),
 		limit(maxsize),
 		count(0) {
+		if (std::filesystem::exists(directory) == false) {
+			std::filesystem::create_directories(directory);
+		}
 		std::ofstream stream(path, std::ios::app);
 		if (stream.is_open()) {
 			stream.close();
