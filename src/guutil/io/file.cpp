@@ -23,6 +23,8 @@ namespace guutil {
 	}
 
 	void File::print(const std::string& value) {
+		std::unique_lock<std::mutex> guard(mutex);
+
 		if (value.length() > limit) {
 			return;
 		}
@@ -38,6 +40,7 @@ namespace guutil {
 			stream.close();
 		} else {
 			path = dir / (name + std::to_string(++count) + ".txt");
+			guard.unlock();
 			print(value);
 		}
 	}

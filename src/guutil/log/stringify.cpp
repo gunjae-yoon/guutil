@@ -62,6 +62,23 @@ namespace guutil {
    				oss << '.' << std::setw(9) << std::setfill('0') << ns.count();
    				return oss.str();
 			}
+
+			std::string getCurrentTimeForFile() {
+				// Get the current time point from system clock
+    			std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+
+    			// Convert to time_t which is compatible with C-style time functions
+    			std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
+
+    			// Convert to tm structure
+    			std::tm now_tm;
+				localtime_r(&now_time_t, &now_tm); // POSIX specific function
+				
+				// Format the time as a string
+   				std::ostringstream oss;
+   				oss << std::put_time(&now_tm, "%Y-%m-%d__%H-%M-%S");
+   				return oss.str();
+			}
 		}
 	}
 }
