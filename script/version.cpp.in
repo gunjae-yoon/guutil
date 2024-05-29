@@ -2,8 +2,8 @@
 
 namespace guutil::Version {
 	const uint64_t major = 0;
-	const uint64_t minor = 0;
-	const uint64_t patch = 1;
+	const uint64_t minor = 1;
+	const uint64_t patch = 0;
 	const char* hashcode = "HASH";
 	const char* updated = "UPDATED";
 	const std::string full = std::to_string(major) + "." + std::to_string(minor) + "." + std::to_string(patch) + " (updated: UPDATED, hash: HASH)";
