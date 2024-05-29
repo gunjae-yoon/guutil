@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(guutil CXX)
+project(guutil VERSION 0.1.0 LANGUAGES CXX)
 
 ##########################################################################
 # general settings
@@ -53,6 +53,9 @@ if (BUILD_LIB)
 		include
 		src
 	)
+	set_target_properties(${TARGET_LIB} PROPERTIES
+		EXPORT_NAME guutil
+	)
 
 	##########################################################################
 	# settings for make install
@@ -63,9 +66,36 @@ if (BUILD_LIB)
 		FILES_MATCHING PATTERN "*.h"
 	)
 	install(
-		FILES ${PROJECT_BINARY_DIR}/lib${TARGET_LIB}.so
-		DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
+		TARGETS ${TARGET_LIB}
+		EXPORT guutilTargets
+		LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
+		ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
+		RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin
 	)
+	install(EXPORT guutilTargets
+		FILE guutilTargets.cmake
+		NAMESPACE guutil::
+		DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/cmake/guutil
+	)
+	
+	include(CMakePackageConfigHelpers)
+	write_basic_package_version_file(
+		"${CMAKE_CURRENT_BINARY_DIR}/guutilConfigVersion.cmake"
+		VERSION ${PROJECT_VERSION}
+		COMPATIBILITY AnyNewerVersion
+	)
+	configure_package_config_file(
+		"${CMAKE_CURRENT_SOURCE_DIR}/script/config.cmake.in"
+		"${CMAKE_CURRENT_BINARY_DIR}/guutilConfig.cmake"
+		INSTALL_DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/cmake/guutil
+	)
+
+	install(FILES
+		"${CMAKE_CURRENT_BINARY_DIR}/guutilConfig.cmake"
+		"${CMAKE_CURRENT_BINARY_DIR}/guutilConfigVersion.cmake"
+		DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/cmake/guutil
+	)
+	
 	install(CODE "
 		file(APPEND \"${CMAKE_INSTALL_PREFIX}/guutil.install_manifest.txt\" \"${CMAKE_INSTALL_PREFIX}/include/\n\")
 		file(GLOB_RECURSE headers \"${PROJECT_SOURCE_DIR}/include/*.h\")

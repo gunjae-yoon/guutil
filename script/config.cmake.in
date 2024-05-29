@@ -1,0 +1,12 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+include("${CMAKE_CURRENT_LIST_DIR}/guutilTargets.cmake")
+
+# Provide an alias for the target
+if(NOT TARGET guutil::guutil)
+  add_library(guutil::guutil ALIAS guutil)
+endif()
+
+set(guutil_VERSION @PROJECT_VERSION@)
