@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(guutil VERSION 0.1.1 LANGUAGES CXX)
+project(guutil VERSION 0.1.2 LANGUAGES CXX)
 
 ##########################################################################
 # general settings
@@ -51,12 +51,15 @@ if (BUILD_LIB)
 		src/guutil/process/named_mutex.cpp
 	)
 	add_dependencies(${TARGET_LIB} guutil_GEN_TARGET)
-	target_include_directories(${TARGET_LIB} PRIVATE
-		include
-		src
+	target_include_directories(${TARGET_LIB} PUBLIC
+		$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+		$<INSTALL_INTERFACE:include>
+		PRIVATE src
 	)
 	set_target_properties(${TARGET_LIB} PROPERTIES
 		EXPORT_NAME guutil
+		VERSION ${PROJECT_VERSION}
+		SOVERSION ${PROJECT_VERSION_MAJOR}
 	)
 
 	##########################################################################
