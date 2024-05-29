@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(guutil VERSION 0.1.0 LANGUAGES CXX)
+project(guutil VERSION 0.1.1 LANGUAGES CXX)
 
 ##########################################################################
 # general settings
@@ -25,12 +25,14 @@ if (BUILD_LIB)
 	set(GEN_SRC
 		${PROJECT_SOURCE_DIR}/src/guutil/version.cpp
 	)
-	add_custom_command(
-		OUTPUT ${GEN_SRC}
-		COMMAND bash "${PROJECT_SOURCE_DIR}/script/version.sh"
-		COMMENT "Try to update version"
-	)
-	add_custom_target(GEN_TARGET DEPENDS ${GEN_SRC})
+	if (NOT TARGET guutil_GETN_TARGET)
+		add_custom_command(
+			OUTPUT ${GEN_SRC}
+			COMMAND bash "${PROJECT_SOURCE_DIR}/script/version.sh"
+			COMMENT "Try to update version"
+		)
+		add_custom_target(guutil_GEN_TARGET DEPENDS ${GEN_SRC})
+	endif()
 
 	##########################################################################
 	# build guutil library
@@ -48,7 +50,7 @@ if (BUILD_LIB)
 		src/guutil/memory/impl/plain.cpp
 		src/guutil/process/named_mutex.cpp
 	)
-	add_dependencies(${TARGET_LIB} GEN_TARGET)
+	add_dependencies(${TARGET_LIB} guutil_GEN_TARGET)
 	target_include_directories(${TARGET_LIB} PRIVATE
 		include
 		src
